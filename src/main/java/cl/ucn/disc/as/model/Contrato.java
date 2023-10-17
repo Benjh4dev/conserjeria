@@ -7,6 +7,7 @@ import lombok.ToString;
 import lombok.Getter;
 import java.time.Instant;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -33,7 +34,7 @@ public class Contrato extends BaseModel {
     private Departamento departamento;
 
     // Relación con Pago
-    @OneToMany(mappedBy = "contrato")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Pago> pagos;
 
 }
