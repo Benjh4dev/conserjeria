@@ -1,4 +1,4 @@
-package cl.ucn.disc.as.utils;
+package cl.ucn.disc.as.conserjeria.utils;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

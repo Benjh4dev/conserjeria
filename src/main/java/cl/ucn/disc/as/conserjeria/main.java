@@ -1,23 +1,24 @@
-package cl.ucn.disc.as;
-import cl.ucn.disc.as.model.Persona;
-import cl.ucn.disc.as.model.Edificio;
-import cl.ucn.disc.as.services.SistemaImpl;
+package cl.ucn.disc.as.conserjeria;
+import cl.ucn.disc.as.conserjeria.model.Persona;
+import cl.ucn.disc.as.conserjeria.model.Edificio;
+import cl.ucn.disc.as.conserjeria.services.SistemaImpl;
+import cl.ucn.disc.as.conserjeria.ui.ApiRestServer;
+import cl.ucn.disc.as.conserjeria.ui.WebController;
 import io.ebean.DB;
 import io.ebean.Database;
+import io.javalin.Javalin;
 import lombok.extern.slf4j.Slf4j;
-import cl.ucn.disc.as.services.Sistema;
-
-
-import java.util.Optional;
+import cl.ucn.disc.as.conserjeria.services.Sistema;
 
 @Slf4j
 public final class main {
 
     public static void main(String[] args) {
         log.debug("Starting...");
+        Database db = DB.getDefault();
+        Sistema sistema = new SistemaImpl(db);
 
         //base de datos
-        Database db = DB.getDefault();
 
         //crear persona
         Persona persona = Persona.builder()
@@ -32,7 +33,6 @@ public final class main {
         db.save(persona);
 
         //the sistema
-        Sistema sistema = new SistemaImpl(db);
 
         Edificio edificio = Edificio.builder()
                 .nombre("LADECO")
@@ -43,5 +43,15 @@ public final class main {
 
         edificio = sistema.add(edificio);
         log.debug("Edificio After DB: " + edificio);
+
+        /*ApiRestServer.start(7070, new WebController());
+        log.debug("Done");
+        */
+        var app = Javalin.create(/*config*/)
+                .get("/", ctx -> ctx.result("Hello World"))
+                .get("personas", ctx -> ctx.json((sistema.getPersonas())))
+                .start(7070);
+
     }
+
 }

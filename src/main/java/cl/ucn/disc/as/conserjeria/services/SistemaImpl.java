@@ -1,14 +1,14 @@
-package cl.ucn.disc.as.services;
-import cl.ucn.disc.as.exceptions.SistemaException;
-import cl.ucn.disc.as.model.*;
+package cl.ucn.disc.as.conserjeria.services;
+import cl.ucn.disc.as.conserjeria.model.*;
+import io.ebean.SqlRow;
 import org.jetbrains.annotations.NotNull;
 import io.ebean.Database;
 import lombok.extern.slf4j.Slf4j;
 
-
 import javax.persistence.PersistenceException;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -72,7 +72,21 @@ public class SistemaImpl implements Sistema {
 
     @Override
     public List<Persona> getPersonas() {
-        return null;
+        List<SqlRow> result = this.database.sqlQuery("SELECT * FROM persona;").findList();
+
+        return result.stream()
+                .map(sqlRow -> new Persona(
+                        sqlRow.getString("rut"),
+                        sqlRow.getString("nombre"),
+                        sqlRow.getString("apellidos"),
+                        sqlRow.getString("email"),
+                        sqlRow.getString("telefono"),
+                        sqlRow.getString("id"),
+                        sqlRow.getString("version"),
+                        sqlRow.getString("created"),
+                        sqlRow.getString("modified")
+                ))
+                .collect(Collectors.toList());
     }
 
     @Override
