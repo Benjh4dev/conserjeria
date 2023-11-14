@@ -14,43 +14,19 @@ import cl.ucn.disc.as.conserjeria.services.Sistema;
 public final class main {
 
     public static void main(String[] args) {
-        log.debug("Starting...");
-        Database db = DB.getDefault();
-        Sistema sistema = new SistemaImpl(db);
 
-        //base de datos
+        //var app = Javalin.create(/*config*/)
+                //.get("/", ctx -> ctx.result("Hello World"))
+                //.get("personas", ctx -> ctx.json((sistema.getPersonas())))
+                //.start(7070);
 
-        //crear persona
-        Persona persona = Persona.builder()
-                .rut("20984692-6")
-                .nombre("Benjamín")
-                .apellidos("Plaza Flores")
-                .email("benja@gmail.com")
-                .telefono("+56912345678")
-                .build();
+        log.debug("Starting Main ..");
 
-        //guargar persona
-        db.save(persona);
 
-        //the sistema
+        //Start the API Rest server
+        Javalin app = ApiRestServer.start(7070, new WebController());
 
-        Edificio edificio = Edificio.builder()
-                .nombre("LADECO")
-                .direccion("Angamos")
-                .build();
-
-        log.debug("Edificio before DB: " + edificio);
-
-        edificio = sistema.add(edificio);
-        log.debug("Edificio After DB: " + edificio);
-
-        /*ApiRestServer.start(7070, new WebController());
-        log.debug("Done");
-        */
-        var app = Javalin.create(/*config*/)
-                .get("/", ctx -> ctx.result("Hello World"))
-                .get("personas", ctx -> ctx.json((sistema.getPersonas())))
-                .start(7070);
+        log.debug("Done. :)");
 
     }
 

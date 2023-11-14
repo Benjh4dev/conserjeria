@@ -1,5 +1,6 @@
 package cl.ucn.disc.as.conserjeria.services;
 
+import cl.ucn.disc.as.conserjeria.exceptions.SistemaException;
 import cl.ucn.disc.as.conserjeria.model.*;
 import java.time.Instant;
 import java.util.List;
@@ -23,7 +24,11 @@ public interface Sistema {
 
     List<Contrato> getContratos();
 
-    List<Persona> getPersonas();
+    List<Persona> getPersonas() throws SistemaException;
+
+    Persona getPersona(String rut) throws SistemaException;
 
     List<Pago> getPagos(String rut);
+
+    void populate();
 }
