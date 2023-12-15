@@ -65,6 +65,9 @@ compileJava {
 }
 
 dependencies {
+    // Controlador JDBC para MySQL/MariaDB
+    implementation 'mysql:mysql-connector-java:8.0.27'
+
     // junit
     testImplementation platform('org.junit:junit-bom:5.10.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
