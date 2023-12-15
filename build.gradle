@@ -24,6 +24,7 @@ plugins {
     id('io.ebean') version "${ebeanVersion}"
     id('com.github.ben-manes.versions') version "${versionPluginVersion}"
     id('com.google.protobuf') version "${protobufPluginVersion}"
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'cl.ucn.disc.as'
@@ -74,6 +75,7 @@ dependencies {
 
     // ebean
     testImplementation "io.ebean:ebean-test:${ebeanVersion}"
+    implementation "io.ebean:ebean-sqlite:${ebeanVersion}"
 
     // ebean
     implementation "io.ebean:ebean:${ebeanVersion}"
@@ -129,5 +131,22 @@ idea {
     module {
         sourceDirs += file("src/generated/main/java")
         sourceDirs += file("src/generated/main/grpc")
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'cl.ucn.disc.as.conserjeria.TheMain'
+        )
+    }
+}
+shadowJar {
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': 'cl.ucn.disc.as.conserjeria.TheMain'
+    }
+    mergeServiceFiles {
+        include 'META-INF/services/io.grpc.LoadBalancerProvider'
     }
 }
