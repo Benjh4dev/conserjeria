@@ -15,14 +15,14 @@ Clona el repositorio (si aún no lo has hecho):
 
 ## Ejecución con SQLite
 
-Para ejecutar la API usando SQLite como base de datos, utiliza el archivo `docker-compose.yml`. Este modo no requiere de una configuración adicional de base de datos.
+Para ejecutar la API usando SQLite como base de datos, utiliza el archivo `docker-compose.yml`. Este modo no requiere de una configuración adicional de base de datos, ***EXPONE EN EL PUETO 7070***.
  ```bash
    docker-compose up -d
  ```
 
 ## Ejecución con MARIADB
 
-Para ejecutar la API usando MariaDB como base de datos, utiliza el archivo `docker-compose-mariadb.yml`. Este modo no requiere de una configuración adicional de base de datos.
+Para ejecutar la API usando MariaDB como base de datos, utiliza el archivo `docker-compose-mariadb.yml`. Este modo no requiere de una configuración adicional de base de datos ***EXPONE EN EL PUETO 8080***.
  ```bash
    docker-compose -f docker-compose-mariadb.yml up -d
  ```
