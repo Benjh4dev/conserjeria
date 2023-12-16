@@ -10,7 +10,7 @@ Para ejecutar esta API, necesitas tener instalado:
 Clona el repositorio (si aún no lo has hecho):
 
    ```bash
-   git clone https://github.com/Benjh4dev/conserjeria.git)https://github.com/Benjh4dev/conserjeria.git
+   git clone https://github.com/Benjh4dev/conserjeria.git
    ```
 
 ## Ejecución con SQLite
