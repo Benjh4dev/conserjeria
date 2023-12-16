@@ -25,10 +25,13 @@ public final class TheMain {
     public static void main(String[] args) throws InterruptedException, IOException {
 
         log.debug("Starting Main with library path: {}", System.getProperty("java.library.path"));
+        int defaultPort = 7070;
+        String portEnv = System.getenv("APP_PORT");
 
+        int port = portEnv != null ? Integer.parseInt(portEnv) : defaultPort;
         // Start the API REST server
         log.debug("Starting ApiRest server ..");
-        Javalin app = ApiRestServer.start(7070 , new WebController());
+        Javalin app = ApiRestServer.start(port , new WebController());
 
         // stop the API REST server.
         // app.stop();

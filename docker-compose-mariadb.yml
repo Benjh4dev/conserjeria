@@ -16,8 +16,9 @@ services:
 
   conserjeria_app:
     build: .
+    container_name: conserjeria_app_mariadb
     ports:
-      - "7070:7070"
+      - "8080:8080"
     depends_on:
       - mariadb
     environment:
@@ -27,6 +28,7 @@ services:
       DB_DDL_MODE: dropCreate
       DB_NAME: conserjeria
       DB_URL: jdbc:mysql://mariadb:3306/conserjeria?useSSL=false&serverTimezone=UTC
+      APP_PORT: 8080
     restart: unless-stopped
 
 volumes:

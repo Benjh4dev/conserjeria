@@ -42,7 +42,7 @@ public final class WebController implements RoutesConfigurator {
         });
 
         // the personas api
-        app.get("/personas", ctx -> {
+        app.get("/api/personas", ctx -> {
             try {
                 ctx.json(this.sistema.getPersonas());
             } catch (SistemaException e) {
@@ -50,7 +50,7 @@ public final class WebController implements RoutesConfigurator {
             }
         });
 
-        app.get("/personas/rut/{rut}", ctx -> {
+        app.get("/api/personas/rut/{rut}", ctx -> {
             String rut = ctx.pathParam("rut");
             Optional<Persona> oPersona = null;
             try {
